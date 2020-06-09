@@ -1,0 +1,118 @@
+import matplotlib.pyplot as plt 
+import numpy as np
+import math
+
+#Creating empty lists
+velocity = []
+velocity1 = []
+velocity2 = []
+radius = []
+radius1 = []
+radius2 = []
+vMass = []
+vMass1 = []
+vMass2 = []
+dmMass = []
+dmMass1 = []
+dmMass2 = []
+massCombined =[]
+massCombined1 = []
+massCombined2 = []
+vPredicted = []
+vPredicted1 = []
+vPredicted2 = []
+dmPredicted = []
+dmPredicted1 = []
+dmPredicted2 = []
+combinedPredicted = []
+combinedPredicted1 = []
+combinedPredicted2 = []
+
+#constants
+a1 = 4394334140
+G = 4.30*(10**-6)
+
+f = open('galaxy1.txt', 'r') 
+f.readline()
+
+g = open('galaxy2.txt', 'r') 
+g.readline()
+
+h = open('galaxy3.txt', 'r')
+h.readline()
+
+
+for line in f:
+  atan = math.atan((float(line.split('\t')[0]))/(1.87))
+  equationb = ((float(line.split('\t')[0])) - ((1.87)*(atan)))
+  equation = (a1)*(equationb)
+  dmMass = float(equation)
+  radius.append(float(line.split('\t')[0]))
+  velocity.append(float(line.split('\t')[1]))
+  vMass.append(float(line.split('\t')[4]))
+  vPredicted.append(((float(G))*((float(line.split('\t')[4])))/(float(line.split('\t')[0])))**(1/2))
+  massCombined.append((float(line.split('\t')[4]))+dmMass)
+  combinedPredicted.append(((float(G))*((float(line.split('\t')[4]))+dmMass)/(float(line.split('\t')[0])))**(1/2))
+
+dmMass = np.array(dmMass)
+vMass = np.array(vMass)
+radius = np.array(radius)
+velocity = np.array(velocity)
+vPrecited = np.array(vPredicted)
+massCombined = np.array(massCombined)
+
+
+for line in g:
+  atan = math.atan((float(line.split('\t')[0]))/(5.86))
+  equationb = ((float(line.split('\t')[0])) - ((5.86)*(atan)))
+  equation = (a1)*(equationb)
+  dmMass1 = float(equation)
+  radius1.append(float(line.split('\t')[0]))
+  velocity1.append(float(line.split('\t')[1]))
+  vMass1.append(float(line.split('\t')[4]))
+  vPredicted1.append(((float(G))*((float(line.split('\t')[4])))/(float(line.split('\t')[0])))**(1/2))
+  massCombined1.append((float(line.split('\t')[4]))+dmMass1)
+  combinedPredicted1.append(((float(G))*((float(line.split('\t')[4]))+dmMass1)/(float(line.split('\t')[0])))**(1/2))
+
+
+dmMass1 = np.array(dmMass1)
+vMass1 = np.array(vMass1)
+radius1 = np.array(radius1)
+velocity1 = np.array(velocity1)
+vPrecited1 = np.array(vPredicted1)
+massCombined1 = np.array(massCombined1)
+
+for line in h:
+  atan = math.atan((float(line.split('\t')[0]))/(2.56))
+  equationb = ((float(line.split('\t')[0])) - ((2.56)*(atan)))
+  equation = (a1)*(equationb)
+  dmMass2 = float(equation)
+  radius2.append(float(line.split('\t')[0]))
+  velocity2.append(float(line.split('\t')[1]))
+  vMass2.append(float(line.split('\t')[4]))
+  vPredicted2.append(((float(G))*((float(line.split('\t')[4])))/(float(line.split('\t')[0])))**(1/2))
+  massCombined2.append((float(line.split('\t')[4]))+dmMass2)
+  combinedPredicted2.append(((float(G))*((float(line.split('\t')[4]))+dmMass2)/(float(line.split('\t')[0])))**(1/2))
+
+  
+dmMass2 = np.array(dmMass2)
+vMass2 = np.array(vMass2)
+radius2 = np.array(radius2)
+velocity2 = np.array(velocity2)
+vPrecited2 = np.array(vPredicted2)
+massCombined2 = np.array(massCombined2)
+combinedPredicted2 = np.array(combinedPredicted2)
+
+plt.plot(radius,velocity) #(blue) velocity against radius
+plt.plot(radius,vPredicted) #(orange) predicted velocity against radius
+plt.plot(radius,combinedPredicted) #(green) sum of dark matter and visible matter predicted velocity against radius
+plt.plot(radius1,velocity1)
+plt.plot(radius1,velocity1)
+plt.plot(radius1,vPredicted1)
+plt.plot(radius1,combinedPredicted1)
+plt.plot(radius2,velocity2)
+plt.plot(radius2,vPredicted2)
+plt.plot(radius2,combinedPredicted2)
+plt.ylabel('Velocity(km/s)')
+plt.xlabel('Radius (kpc)')
+plt.show()
