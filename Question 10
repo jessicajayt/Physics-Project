@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt 
+import numpy as np
+import math
+
+radius = []
+vMass = [] #Empty list for the mass of visible matter
+dmMass = [] #Empty list for the mass of dark matter
+combinedMass = []
+a1 = 4394334140
+
+#The following code is for values.txt
+f = open('values.txt', 'r') 
+f.readline()
+
+for line in f: 
+  vMass.append(float(line.split('\t')[4]))
+  radius.append(float(line.split('\t')[0]))
+  atan = math.atan((float(line.split('\t')[0]))/(1.87))
+  equationb = ((float(line.split('\t')[0]))- ((1.87)*(atan)))
+  equation = (a1)*(((float(line.split('\t')[0]))- ((1.87)*(atan))))
+  dmMass.append((a1)*(((float(line.split('\t')[0]))- ((1.87)*(atan)))))
+  combinedMass.append(((a1)*(((float(line.split('\t')[0]))- ((1.87)*(atan))))) + (float(line.split('\t')[4])))
+
+
+x = np.array(radius)
+y = np.array(vMass)
+z = np.array(dmMass)
+
+plt.plot(x,y) #This is the mass of visible matter against the radius - blue line
+plt.plot(x,z) #This is the mass of dark matter against the radius - orange
+plt.plot(x,combinedMass) #This is the combined masses against the radius - green
+plt.show()
