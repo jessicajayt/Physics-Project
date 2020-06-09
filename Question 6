@@ -1,0 +1,19 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+
+f = open('values.txt', 'r') #opens up and reads the file
+f.readline()
+x = []
+y = []
+
+for line in f: #puts the values into lists
+  x.append(float(line.split('\t')[1]))
+  y.append(float(line.split('\t')[0]))
+
+
+
+plt.plot(x,y) #plots a graph
+plt.title('velocity(km/s) as a function of the radius(kpc)')
+plt.xlabel('radius(kpc)')
+plt.ylabel('velocity(km/s)')
+plt.show()
